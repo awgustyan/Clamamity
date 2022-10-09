@@ -404,6 +404,8 @@ namespace Clamamity.Content
                     TeleportPosition.X = player.position.X + player.velocity.X * 30;
                     ProjectilePostion = TeleportPosition;
 
+                    attackParticles(1, 300, TeleportPosition + Vector2.UnitY * 10);
+
                     if (NPC.lifeMax * 0.5f >= NPC.life)
                     {
                         Projectile.NewProjectile(entitySource, ProjectilePostion + Vector2.UnitY * 500, -Vector2.UnitY, projectiletype, 50, 0, Main.myPlayer);
@@ -491,7 +493,23 @@ namespace Clamamity.Content
                 }
 
             }
+            void attackParticles(int height,int width, Vector2 position)
+            {
+                Vector2 SpawnPos;
+
+                SpawnPos.X = position.X - 0.5f * width;
+                SpawnPos.Y = position.Y;
+                for (int d = 0; d < 140; d++)
+                {
+                    int dustnumber = Dust.NewDust(SpawnPos , width, height, DustID.PinkFairy, 0f, 0f, 200, Color.OrangeRed, 1.2f);
+                    Main.dust[dustnumber].noGravity = true;
+                }
+
+            }
         }
     }
+
+
 }
+
 
